@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Football API</title>
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+
+        <!-- Favicon
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link rel="icon" type="image/png" href="/images/favicon.png">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div style="margin-top: 7%;">
+                    <center><h1>Welcome to the Football API!</h1>
+                    <p>This is a simple and fast API where you can search easily for squads stats and more!</p></center>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5%;">
+                <div class="one-half column">
+                    <p>Starts now by clicking the button above to search for all the squads in the main Italy's championship</p>
+                    <a class="button button-primary" href="/squads">Get all the squads</a>
+                </div>
+                <div class="one-half column">
+                    <p>Or type the name of a squad there to search for it in the API Database</p>
+                    <div class="row">
+                        <div class="one-half column">
+                            <input type="text" placeholder="Squadname" id="squadname">
+                        </div>
+                        <div class="one-half column">
+                            <input type="submit" onclick="squadSearch()" value="Search">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 6%;">
+                <div class="column">
+                    <h4>Documentation</h4>
+                </div>
+            </div>
+            <table class="u-full-width">
+                <thead>
+                  <tr>
+                    <th>Actions</th>
+                    <th>Commands</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Get all the squads informations</td>
+                    <td>/squads</td>
+                  </tr>
+                  <tr>
+                    <td>Get a single squad by its name</td>
+                    <td>/squads/squadname/"name"</td>
+                  </tr>
+                  <tr>
+                    <td>Get a single squad by its position</td>
+                    <td>/squads/squadposition/"position"</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </body>
+</html>
+
+<script>
+function squadSearch() {
+  var squad = document.getElementById("squadname").value;
+  window.location.replace("/squads/squadname/" + squad);
+} 
+</script>
