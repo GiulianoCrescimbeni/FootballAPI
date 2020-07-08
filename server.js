@@ -77,3 +77,37 @@ api.get("/squads/squadposition/:squadposition", (req, res, next) => {
       }
   });
 });
+
+api.get("/scorers", (req, res, next) => {
+  con.query("SELECT * FROM scorers", function(err, result, fields) {
+    if(result) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(result);
+    } else {
+      res.json("No scorers found");
+    }
+  });
+});
+
+api.get("/scorers/scorername/:scorername", (req, res, next) => {
+  con.query("SELECT * FROM scorers WHERE player_name LIKE '%" + req.params.scorername + "%'", function(err, result, fields) {
+    if(result) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(result);
+    } else {
+      res.json("No scorers found");
+    }
+  });
+});
+
+api.get("/scorers/scorerposition/:scorerposition", (req, res, next) => {
+  con.query("SELECT * FROM scorers WHERE player_position = '" + req.params.scorerposition + "'", function(err, result, fields) {
+    if(result) {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(result);
+    } else {
+      res.json("No scorers found");
+    }
+  });
+});
+
