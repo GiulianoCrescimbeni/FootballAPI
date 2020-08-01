@@ -22,7 +22,7 @@ function initializeConnection(config) {
             }
         });
     }
-    
+
     var connection = mysql.createConnection(config);
     addDisconnectHandler(connection);
 
@@ -34,80 +34,16 @@ var con = initializeConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "FootballAPI",
+    database: "footballapi",
 });
 
 api.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html')); 
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 api.get('/index.html',function(req,res){
-  res.sendFile(path.join(__dirname + '/index.html')); 
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-api.get("/squads", (req, res, next) => {
-  con.query("SELECT * FROM teams", function(err, result, fields) {
-    if(result) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(result);
-    } else {
-      res.json("No squads found");
-    }
-  });
-});
-
-api.get("/squads/squadname/:squadName", (req, res, next) => {
-    con.query("SELECT * FROM teams WHERE squad_name = '" + req.params.squadName + "'", function(err, result, fields) {
-      if(result) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(result);
-      } else {
-        res.json("No squads found");
-      }
-  });
-});
-
-api.get("/squads/squadposition/:squadposition", (req, res, next) => {
-    con.query("SELECT * FROM teams WHERE squad_position = '" + req.params.squadposition + "'", function(err, result, fields) {
-      if(result) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(result);
-      } else {
-        res.json("No squads found");
-      }
-  });
-});
-
-api.get("/scorers", (req, res, next) => {
-  con.query("SELECT * FROM scorers", function(err, result, fields) {
-    if(result) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(result);
-    } else {
-      res.json("No scorers found");
-    }
-  });
-});
-
-api.get("/scorers/scorername/:scorername", (req, res, next) => {
-  con.query("SELECT * FROM scorers WHERE player_name LIKE '%" + req.params.scorername + "%'", function(err, result, fields) {
-    if(result) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(result);
-    } else {
-      res.json("No scorers found");
-    }
-  });
-});
-
-api.get("/scorers/scorerposition/:scorerposition", (req, res, next) => {
-  con.query("SELECT * FROM scorers WHERE player_position = '" + req.params.scorerposition + "'", function(err, result, fields) {
-    if(result) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(result);
-    } else {
-      res.json("No scorers found");
-    }
-  });
-});
-
+api.use(express.static(__dirname));
+require('./routes.js')(api, con, path);
