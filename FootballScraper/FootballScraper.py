@@ -7,15 +7,38 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 from mysql.connector import Error
 
-squadURL = 'https://www.gazzetta.it/calcio/serie-a/classifica/?refresh_ce-cp'
-playerURL = 'https://www.gazzetta.it/calcio/serie-a/marcatori/?refresh_ce'
+serieaSquadURL = 'https://www.gazzetta.it/calcio/serie-a/classifica/'
+serieaPlayerURL = 'https://www.gazzetta.it/calcio/serie-a/marcatori/'
+premierLeagueSquadURL = 'https://www.gazzetta.it/calcio/premier-league/classifica/'
+premierLeagueScorersURL = 'https://www.gazzetta.it/calcio/premier-league/marcatori/'
+ligaSquadURL = 'https://www.gazzetta.it/calcio/liga/classifica/'
+ligaPlayerURL = 'https://www.gazzetta.it/calcio/liga/marcatori/'
+bundesligaSquadURL = 'https://www.gazzetta.it/calcio/bundesliga/classifica/'
+bundesligaPlayerURL = 'https://www.gazzetta.it/calcio/bundesliga/marcatori/'
+ligue1SquadURL = 'https://www.gazzetta.it/calcio/ligue-1/classifica/'
+ligue1PlayerURL = 'https://www.gazzetta.it/calcio/ligue-1/marcatori/'
+
 event_schedule = sched.scheduler(time.time, time.sleep)
 
-def _teams_scraper(myurl):
+def _main():
+    #Main function to run all the scraping threads#
+    _teams_scraper(serieaSquadURL, "serie_a_teams")
+    _teams_scraper(premierLeagueSquadURL, "premier_league_teams")
+    _teams_scraper(ligaSquadURL, "liga_teams")
+    _teams_scraper(bundesligaSquadURL, "bundesliga_teams")
+    _teams_scraper(ligue1SquadURL, "ligue1_teams")
+    _scorers_scraper(serieaPlayerURL, "serie_a_scorers")
+    _scorers_scraper(premierLeagueScorersURL, "premier_league_scorers")
+    _scorers_scraper(ligaPlayerURL, "liga_scorers")
+    _scorers_scraper(bundesligaPlayerURL, "bundesliga_scorers")
+    _scorers_scraper(ligue1PlayerURL, "ligue1_scorers")
+    event_schedule.enter(10, 10, _main())
+
+def _teams_scraper(myurl, table):
     #Creating the connection with the database#
     try:
         connection = mysql.connector.connect(host='localhost',
-                                             database='FootballAPI',
+                                             database='footballapi',
                                              user='root',
                                              password='')
         cursor = connection.cursor()
@@ -54,8 +77,11 @@ def _teams_scraper(myurl):
             print("Tie Match: " + squad_tie)
             print("----------------------")
 
+            #Security layer to prevent sql injection#
+            squad_name = squad_name.replace("'", "''")
+
             #Launching the update query to save data#
-            sql = "UPDATE teams SET squad_name = '"+squad_name+"', squad_points = '"+squad_points+"', squad_played = '"+squad_played+"', squad_winned = '"+squad_win+"', squad_loosed = '"+squad_loose+"', squad_tie = '"+squad_tie+"' WHERE squad_position = '"+position+"'"
+            sql = "UPDATE "+table+" SET squad_name = '"+squad_name+"', squad_points = '"+squad_points+"', squad_played = '"+squad_played+"', squad_winned = '"+squad_win+"', squad_loosed = '"+squad_loose+"', squad_tie = '"+squad_tie+"' WHERE squad_position = '"+position+"'"
             cursor.execute(sql)
             connection.commit()
 
@@ -69,13 +95,11 @@ def _teams_scraper(myurl):
             connection.close()
             print("MySQL connection is closed")
 
-    event_schedule.enter(10, 1, _scorers_scraper(playerURL))
-
-def _scorers_scraper(myurl):
+def _scorers_scraper(myurl, table):
     #Creating the connection with the database#
     try:
         connection = mysql.connector.connect(host='localhost',
-                                             database='FootballAPI',
+                                             database='footballapi',
                                              user='root',
                                              password='')
         cursor = connection.cursor()
@@ -108,6 +132,9 @@ def _scorers_scraper(myurl):
             player_penalties_container = player.findAll("div", {"class":"sc-AxirZ flwmbm"})
             player_penalties = player_penalties_container[0].div.div.text
 
+            #Translating the player position from italian to english#
+            player_role = translate(player_role)
+
             print("Position: " + str(player_position))
             print("Name: " + player_name)
             print("Squad: " + player_squad)
@@ -116,8 +143,12 @@ def _scorers_scraper(myurl):
             print("Penalties: " + player_penalties)
             print("----------------------")
 
+            #Security layer to prevent sql injection#
+            player_name = player_name.replace("'", "''")
+            player_squad = player_squad.replace("'", "''")
+
             #Launching the update query to save data#
-            sql = "UPDATE scorers SET player_name = '"+player_name+"', player_squad = '"+player_squad+"', player_role = '"+player_role+"', player_goals = '"+player_goals+"', player_penalties = '"+player_penalties+"' WHERE player_position = '"+str(player_position)+"'"
+            sql = "UPDATE "+table+" SET player_name = '"+player_name+"', player_squad = '"+player_squad+"', player_role = '"+player_role+"', player_goals = '"+player_goals+"', player_penalties = '"+player_penalties+"' WHERE player_position = '"+str(player_position)+"'"
             cursor.execute(sql)
             connection.commit()
 
@@ -132,7 +163,14 @@ def _scorers_scraper(myurl):
             connection.close()
             print("MySQL connection is closed")
 
-    event_schedule.enter(10, 1, _teams_scraper(squadURL))
+#Translator Function#
+def translate(x):
+    return {
+        'Attaccante ': "Striker",
+        'Centrocampista ': "Midfielder",
+        'Difensore ': "Defender",
+        'Portiere ': "Goalkeeper"
+    }.get(x)
 
-event_schedule.enter(10, 1, _teams_scraper(squadURL))
+event_schedule.enter(10, 1, _main())
 event_schedule.run()
