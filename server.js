@@ -1,9 +1,10 @@
 var express = require("express");
 var mysql = require("mysql");
 var path = require("path");
+var PORT = process.env.PORT || 3000;
 
 var api = express();
-api.listen(3000, () => {
+api.listen(PORT, () => {
   console.log("API Server running on port 3000");
 });
 
