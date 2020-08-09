@@ -37,10 +37,12 @@ def _main():
 def _teams_scraper(myurl, table):
     #Creating the connection with the database#
     try:
-        connection = mysql.connector.connect(host='localhost',
-                                             database='footballapi',
-                                             user='root',
-                                             password='')
+        connection = mysql.connector.connect(
+            host: "db4free.net",
+            user: "giulianoc",
+            password: "Ciao1234",
+            database: "footballapi",
+            port: "3306",)
         cursor = connection.cursor()
 
         #Opening the connection with the site#
@@ -98,10 +100,12 @@ def _teams_scraper(myurl, table):
 def _scorers_scraper(myurl, table):
     #Creating the connection with the database#
     try:
-        connection = mysql.connector.connect(host='localhost',
-                                             database='footballapi',
-                                             user='root',
-                                             password='')
+        connection = mysql.connector.connect(
+            host: "db4free.net",
+            user: "giulianoc",
+            password: "Ciao1234",
+            database: "footballapi",
+            port: "3306",)
         cursor = connection.cursor()
 
         #Opening the connection with the site#
