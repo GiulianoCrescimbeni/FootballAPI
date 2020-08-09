@@ -1,5 +1,11 @@
 # FootballAPI
-A simple Football API
+A simple Football API  
+
+[![HitCount](http://hits.dwyl.com/GiulianoCrescimbeni/FootballAPI.svg)](http://hits.dwyl.com/GiulianoCrescimbeni/FootballAPI) [![Donate](https://img.shields.io/badge/$-support-12a0df.svg?style=flat)](http://paypal.me/GiulianoCrescimbeni) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)]() 
+```
+-> Wanna see a live preview of the API? Visit this link: footballapi2020.herokuapp.com <-
+```
+
 - [What is it?](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#what-is-this)
 - [How it works?](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#how-it-works)
 - [Installation and usage](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#installation-and-usage)
