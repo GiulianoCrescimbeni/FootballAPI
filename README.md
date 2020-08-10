@@ -28,3 +28,6 @@ Now you can run the file and it will constantly update data until you stop it. T
 
 # :fireworks: Conclusion
 That's all you need to know. If you find any bugs or have any suggestions, do not hesitate to contact me on telegram (@Giuliano_Crescimbeni). Enjoy :D
+
+Copyright (c) 2020 GiulianoCrescimbeni 
+(See the license file in the main directory)
