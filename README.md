@@ -28,6 +28,6 @@ First of all, you need to install [python3](https://www.python.org/downloads/), 
 Now you can run the file and it will constantly update data until you stop it. To get the server to work you will need to install [node.js](https://nodejs.org/it/download/). Run the command ```node``` to be sure it is installed properly, and then use the command ```node server.js``` to start the server. server.js is the main file that sets up a local server, while route.js is the file where all the routes and behaviors are stored. Now that the server is running you can open up your browser and type ```localhost:3000``` and you will be redirected to the main index. The front end is built with a powerful and light framework called [skeleton](http://getskeleton.com/). Enjoy your new API.
 
 # :fireworks: Conclusion
-That's all you need to know. If you find any bugs or have any suggestions, do not hesitate to contact me on telegram (@Giuliano_Crescimbeni). Enjoy :D
+That's all you need to know. If you find any bugs or have any suggestions, do not hesitate to contact me on telegram (@Giuliano_Crescimbeni), or follow me on twitter to get more contents and updates (@CrescimbeniG). Enjoy :D
 
 Copyright (c) 2020 GiulianoCrescimbeni 
