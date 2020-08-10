@@ -11,6 +11,7 @@ A simple Football API
 - [Conclusion](https://github.com/GiulianoCrescimbeni/FootballAPI#fireworks-conclusion)
 
 If you want to contribute, go ahead and fork it, togheter we can make it the best sports API in the world!
+### :warning: The index design is pretty low, I made that and, as you can see, I’m not too good, it needs a restyle. If you are a front web developer and have some time, please fork it and fix that monster :D
 
 # :mag: What is this?
 As the title says, this is a small project that consists of a fast API to provide information about soccer teams or scorers in many leagues. You can get the full live ranking of one of the championships supported, get much information about a single squad, and more!
