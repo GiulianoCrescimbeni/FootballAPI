@@ -1,5 +1,5 @@
 # :soccer:FootballAPI
-A simple Football API  
+A simple Football API
 
 [![HitCount](http://hits.dwyl.com/GiulianoCrescimbeni/FootballAPI.svg)](http://hits.dwyl.com/GiulianoCrescimbeni/FootballAPI) [![Donate](https://img.shields.io/badge/$-support-12a0df.svg?style=flat)](http://paypal.me/GiulianoCrescimbeni) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)]() 
 
@@ -9,6 +9,8 @@ A simple Football API
 - [How it works?](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#how-it-works)
 - [Installation and usage](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#installation-and-usage)
 - [Conclusion](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#conclusion)
+
+If you want to contribute, go ahead and fork it, togheter we can make it the best sports API in the world!
 
 # :mag: What is this?
 As the title says, this is a small project that consists of a fast API to provide information about soccer teams or scorers in many leagues. You can get the full live ranking of one of the championships supported, get much information about a single squad, and more!
