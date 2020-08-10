@@ -5,10 +5,10 @@ A simple Football API
 
 ## :warning: Wanna see a live preview of the API? [Visit this link](https://footballapi2020.herokuapp.com) :warning:
 
-- [What is it?](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#what-is-this)
-- [How it works?](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#how-it-works)
-- [Installation and usage](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#installation-and-usage)
-- [Conclusion](https://github.com/GiulianoCrescimbeni/FootballAPI/new/master?readme=1#conclusion)
+- [What is it?](https://github.com/GiulianoCrescimbeni/FootballAPI#mag-what-is-this)
+- [How it works?](https://github.com/GiulianoCrescimbeni/FootballAPI#mag-how-it-works)
+- [Installation and usage](https://github.com/GiulianoCrescimbeni/FootballAPI#mag-installation-and-usage)
+- [Conclusion](https://github.com/GiulianoCrescimbeni/FootballAPI#mag-conclusion)
 
 If you want to contribute, go ahead and fork it, togheter we can make it the best sports API in the world!
 
