@@ -3,7 +3,7 @@ A simple Football API
 
 [![HitCount](http://hits.dwyl.com/GiulianoCrescimbeni/FootballAPI.svg)](http://hits.dwyl.com/GiulianoCrescimbeni/FootballAPI) [![Donate](https://img.shields.io/badge/$-support-12a0df.svg?style=flat)](http://paypal.me/GiulianoCrescimbeni) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)]() 
 
-## :warning: Wanna see a live preview of the API? [Visit this link](https://footballapi2020.herokuapp.com) :warning:
+## :warning: Wanna see a live preview of the API? [Visit this link](http://www.footballapi.online/) :warning:
 
 - [What is it?](https://github.com/GiulianoCrescimbeni/FootballAPI#mag-what-is-this)
 - [How it works?](https://github.com/GiulianoCrescimbeni/FootballAPI#hammer-how-it-works)
