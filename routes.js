@@ -1,21 +1,21 @@
 module.exports = function (api, con, path) {
 
-  function squadToTable(squadName) {
+  function squadToURL(squadName) {
     switch (squadName) {
       case "seriea":
-        return "serie_a";
+        return "serie-a-13";
         break;
       case "bundesliga":
-        return "bundesliga"
+        return "bundesliga-1"
         break
       case "premierleague":
-        return "premier_league";
+        return "premier-league-9";
         break
       case "ligue1":
-        return "ligue1";
+        return "ligue-1-uber-eats-23";
         break;
       case "liga":
-        return "liga";
+        return "laliga-10";
         break;
       default: "null"
     }
@@ -23,41 +23,57 @@ module.exports = function (api, con, path) {
 
   //Squads Routes//
   //General squad getter//
-  api.get("/:championship/squads/", (req, res, next) => {
-    squadName = squadToTable(req.params.championship);
-    con.query("SELECT * FROM "+squadName+"_teams", function(err, result, fields) {
-      if(result) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(result);
-      } else {
-        res.json("No squads found");
-      }
+  api.get("/:championship/", (req, res, next) => {
+    //Use python shell//
+    const {PythonShell} = require("python-shell");
+
+    let options = {
+      mode: 'text',
+      pythonOptions: ['-u'], // get print results in real-time
+      args: [squadToURL(req.params.championship)]
+    };
+
+    PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
+        if (err) throw err;
+        res.json(JSON.parse(JSON.parse(data)));
     });
   });
 
   //Squad from squad name//
   api.get("/:championship/squadname/:squadName", (req, res, next) => {
-      squadName = squadToTable(req.params.championship);
-      con.query("SELECT * FROM "+squadName+"_teams WHERE squad_name LIKE '%" + req.params.squadName + "%'", function(err, result, fields) {
-        if(result) {
-          res.setHeader('Content-Type', 'application/json');
-          res.send(result);
-        } else {
-          res.json("No squads found");
-        }
+    //Use python shell//
+    const {PythonShell} = require("python-shell");
+
+    var filters = "name-" + req.params.squadName
+
+    let options = {
+      mode: 'text',
+      pythonOptions: ['-u'], // get print results in real-time
+      args: [squadToURL(req.params.championship), filters]
+    };
+
+    PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
+        if (err) throw err;
+        res.json(JSON.parse(JSON.parse(data)));
     });
   });
 
   //Squad from squad position//
   api.get("/:championship/squadposition/:squadposition", (req, res, next) => {
-      squadName = squadToTable(req.params.championship);
-      con.query("SELECT * FROM "+squadName+"_teams WHERE squad_position = '" + req.params.squadposition + "'", function(err, result, fields) {
-        if(result) {
-          res.setHeader('Content-Type', 'application/json');
-          res.send(result);
-        } else {
-          res.json("No squads found");
-        }
+    //Use python shell//
+    const {PythonShell} = require("python-shell");
+
+    var filters = "position-" + req.params.squadposition
+
+    let options = {
+      mode: 'text',
+      pythonOptions: ['-u'], // get print results in real-time
+      args: [squadToURL(req.params.championship), filters]
+    };
+
+    PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
+        if (err) throw err;
+        res.json(JSON.parse(JSON.parse(data)));
     });
   });
 
@@ -102,21 +118,5 @@ module.exports = function (api, con, path) {
   });
 
   //Today Matches//
-  api.get("/test", (req, res, next) => {
 
-    //Use python shell//
-    const {PythonShell} = require("python-shell");
-
-    let options = {
-      mode: 'text',
-      pythonOptions: ['-u'], // get print results in real-time
-      args: ['serie-a-13']
-    };
-
-    PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
-        if (err) throw err;
-        res.json(JSON.parse(JSON.parse(data)));
-    });
-  });
-
-}
+  }
