@@ -1,0 +1,17 @@
+{
+  "name": "footballapi",
+  "version": "1.0.0",
+  "description": "A FootBall Squad API",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Giuliano Crescimbeni",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "pg": "^8.3.0",
+    "python-shell": "^3.0.0"
+  }
+}

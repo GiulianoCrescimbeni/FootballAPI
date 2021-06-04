@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Football API</title>
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- FONT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+
+        <!-- Favicon
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link rel="icon" type="image/png" href="/images/favicon.png">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div style="margin-top: 7%;">
+                    <center><h1>Welcome to the Football API!</h1>
+                    <p>This is a simple and fast API where you can search easily for squads stats and more!</p>
+                    <a href="https://github.com/GiulianoCrescimbeni/FootballAPI"><button>View the source code</button></a>
+                    </center>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5%;">
+                <div class="one-half column">
+                    <p>Starts now by clicking the button above to search for all the squads in the main Italy's league. (<strong>Serie A</strong>)</p>
+                    <a class="button button-primary" href="/seriea/squads">Get all the squads</a>
+                </div>
+                <div class="one-half column">
+                    <p>Or type the name of a squad there to search for it in the API Database (<strong>Serie A</strong>)</p>
+                    <div class="row">
+                        <div class="one-half column">
+                            <input type="text" placeholder="Squadname" id="squadname">
+                        </div>
+                        <div class="one-half column">
+                            <input type="submit" onclick="squadSearch()" value="Search">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 3%">
+              <row><center><h4>Championships currently implemented:</h4><center></row>
+                <h5><strong>• Serie A  •  Premier League  •  Liga  •  Bundesliga  •  Ligue 1  •</strong></h5>
+            </div>
+            <div class="row" style="margin-top: 6%;">
+                <div class="column">
+                    <h4>Documentation</h4>
+                </div>
+            </div>
+            <table class="u-full-width">
+                <thead>
+                  <tr>
+                    <th>Parameters (those preceded by a ":")</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>championship</strong></td>
+                    <td>The name of the championship that you want to search for; This are the example parameters: <strong>"seriea"  "premierleague"  "liga"  "bundesliga"  "ligue1"</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>squadname  scorername</strong></td>
+                    <td>The name of the squad/player you want to search for. You can also digit a bunch of letters, the API will fetch the corresponding results that contain them.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>squadposition  scorerposition</strong></td>
+                    <td>This can be a single digit with the position of the player/squad that you are searching for in a specific league.</td>
+                  </tr>
+                </tbody>
+            </table>
+            <table class="u-full-width">
+                <thead>
+                  <tr>
+                    <th>Squads Actions</th>
+                    <th>Commands</th>
+                    <th>Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Get all the squads informations in a certain league</td>
+                    <td>/:championship/squads</td>
+                    <td>/premierleague/squads <a href="/premierleague/squads" style="margin-left:0%">Result</a></td>
+                  </tr>
+                  <tr>
+                    <td>Get a single squad by its name</td>
+                    <td>/:championship/squadname/:squadname</td>
+                    <td>/ligue1/squadname/brest <a href="/ligue1/squadname/brest" style="margin-left:0%">Result</a></td>
+                  </tr>
+                  <tr>
+                    <td>Get a single squad by its position</td>
+                    <td>/:championship/squadposition/:squadposition</td>
+                    <td>/seriea/squadposition/2 <a href="/seriea/squadposition/2" style="margin-left:2%">Result</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="u-full-width">
+                  <thead>
+                    <tr>
+                      <th>Scorers Actions</th>
+                      <th>Commands</th>
+                      <th>Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Get all the scorers informations from a certain league</td>
+                      <td>/:championship/scorers</td>
+                      <td>/liga/scorers <a href="/liga/scorers" style="margin-left:5%">Result</a></td>
+                    </tr>
+                    <tr>
+                      <td>Get one or some scorers by searching their name</td>
+                      <td>/:championship/scorername/:scorername</td>
+                      <td>/bundesliga/scorername/lewandowski <a href="/bundesliga/scorername/lewandowski" style="margin-left:0%">Result</a></td>
+                    </tr>
+                    <tr>
+                      <td>Get a single scorer by its position</td>
+                      <td>/:championship/scorerposition/:position</td>
+                      <td>/seriea/scorerposition/5 <a href="/seriea/scorerposition/5" style="margin-left:5%">Result</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+        </div>
+    </body>
+</html>
+
+<script>
+function squadSearch() {
+  var squad = document.getElementById("squadname").value;
+  window.location.replace("/seriea/squadname/" + squad);
+}
+</script>
