@@ -63,7 +63,7 @@ for squad in squads:
                 squad_class = Squad(squad_position, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie)
                 squads_list.append(squad_class)
         elif(parameter == "name"):
-            if(value in squad_name):
+            if(squad_name.upper().find(value.upper()) != -1):
                 squad_class = Squad(squad_position, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie)
                 squads_list.append(squad_class)
     else:
@@ -98,10 +98,16 @@ for squad in squads:
 #                data = data + data_set
 
 else:
+    i = 0
     for squad in squads_list:
-        data_set = '{"Position":"'+squad.position+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"},'
+        if(i == 0):
+            data_set = '{"Position":"'+squad.position+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
+            i = i + 1
+        else:
+            data_set = ',{"Position":"'+squad.position+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
         data = data + data_set
 
-data = data[:-1] + "]"
+data = data + "]"
 json_dump = json.dumps(data)
-print(json_dump)
+print(data)
+exit()

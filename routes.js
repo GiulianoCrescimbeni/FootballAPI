@@ -29,13 +29,14 @@ module.exports = function (api, con, path) {
 
     let options = {
       mode: 'text',
+      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
       args: [squadToURL(req.params.championship)]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
         if (err) throw err;
-        res.json(JSON.parse(JSON.parse(data)));
+        res.json(JSON.parse(data));
     });
   });
 
@@ -48,13 +49,14 @@ module.exports = function (api, con, path) {
 
     let options = {
       mode: 'text',
+      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
       args: [squadToURL(req.params.championship), filters]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
-        if (err) throw err;
-        res.json(JSON.parse(JSON.parse(data)));
+      if (err) throw err;
+      res.json(JSON.parse(data));
     });
   });
 
@@ -67,13 +69,14 @@ module.exports = function (api, con, path) {
 
     let options = {
       mode: 'text',
+      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
       args: [squadToURL(req.params.championship), filters]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
-        if (err) throw err;
-        res.json(JSON.parse(JSON.parse(data)));
+      if (err) throw err;
+      res.json(JSON.parse(data));
     });
   });
 
