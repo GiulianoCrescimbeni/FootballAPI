@@ -17,6 +17,9 @@ module.exports = function (api, con, path) {
       case "liga":
         return "laliga-10";
         break;
+      case "championship":
+        return "the-championship-27";
+        break;
       default: "null"
     }
   }

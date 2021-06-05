@@ -97,15 +97,14 @@ for squad in squads:
 #                data_set = '{ "Position":"'+squad_position+'", "Name":"'+squad_name+'", "Points":"'+squad_points+'", "Played":"'+squad_played+'", "Winned":"'+squad_win+'", "Loosed":"'+squad_loose+'", "Tie":"'+squad_tie+'"}'
 #                data = data + data_set
 
-else:
-    i = 0
-    for squad in squads_list:
-        if(i == 0):
-            data_set = '{"Position":"'+squad.position+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
-            i = i + 1
-        else:
-            data_set = ',{"Position":"'+squad.position+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
-        data = data + data_set
+i = 0
+for squad in squads_list:
+    if(i == 0):
+        data_set = '{"Position":"'+squad.position+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
+        i = i + 1
+    else:
+        data_set = ',{"Position":"'+squad.position+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
+    data = data + data_set
 
 data = data + "]"
 json_dump = json.dumps(data)
