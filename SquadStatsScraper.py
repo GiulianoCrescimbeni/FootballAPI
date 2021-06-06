@@ -110,5 +110,5 @@ for squad in squads_list:
 
 data = data + "]"
 json_dump = json.dumps(data)
-print(data)
+print(json_dump)
 exit()

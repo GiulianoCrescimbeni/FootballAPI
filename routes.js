@@ -21,6 +21,15 @@ module.exports = function (api, con, path) {
     }
   }
 
+  
+  function decodeUtf8(bytes) {
+    var encoded = "";
+    for (var i = 0; i < bytes.length; i++) {
+        encoded += '%' + bytes[i].toString(16);
+    }
+    return decodeURIComponent(encoded);
+  } 
+
   //Squads Routes//
   //General squad getter//
   api.get("/:championship/", (req, res, next) => {
@@ -36,7 +45,7 @@ module.exports = function (api, con, path) {
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
         if (err) throw err;
-        res.json(JSON.parse(data));
+        res.json(JSON.parse(JSON.parse(data)));
     });
   });
 
@@ -56,7 +65,7 @@ module.exports = function (api, con, path) {
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
       if (err) throw err;
-      res.json(JSON.parse(data));
+      res.json(JSON.parse(JSON.parse(data)));
     });
   });
 
@@ -76,7 +85,7 @@ module.exports = function (api, con, path) {
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
       if (err) throw err;
-      res.json(JSON.parse(data));
+      res.json(JSON.parse(JSON.parse(data)));
     });
   });
 
@@ -134,10 +143,7 @@ module.exports = function (api, con, path) {
 
     PythonShell.run('NewsChampionshipScraper.py', options, function (err, data) {
       if (err) throw err;
-      var data = JSON.stringify(data);
-      data = data.replace(/\\/g, '');
-      data = data.substring(1)
-      res.json(JSON.parse(data));
+      res.json(JSON.parse(JSON.parse(data)));
     });
   });
 

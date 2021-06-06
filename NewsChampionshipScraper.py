@@ -27,7 +27,11 @@ uClient.close()
 
 #Souping the page and getting data#
 page_soup = soup(page_html,"html.parser")
-news_total = page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
+news_total = page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--xl gallery__teaser--tablet-landscape--xl gallery__teaser--tablet-portrait--xl gallery__teaser--mobile--xl"})
+news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--lg gallery__teaser--tablet-landscape--lg gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
+news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
+news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--sm gallery__teaser--mobile--xs"})
+news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--md gallery__teaser--tablet-landscape--md gallery__teaser--tablet-portrait--sm gallery__teaser--mobile--xs"})
 news_list = []
 data = "["
 counter = 0
@@ -35,11 +39,11 @@ counter = 0
 for news in news_total:
     counter = counter + 1
     #Scraping data from the hmtl#
-    news_link_container = news.find("a", {"class":"teaser__link"})
-    news_link = news_link_container.href
+    news_link_container = news.find("a", href=True)
+    news_link = "https://onefootball.com" + news_link_container['href']
 
-    image_container = news.find("picture", {"class":"of-image__picture"})
-    image = image_container.source.srcset
+    image_container = news.find("source", attrs = {'srcset' : True})
+    image = image_container['srcset']
 
     title_container = news.find("h3", {"class":"teaser__title"})
     title = title_container.text
@@ -57,13 +61,13 @@ for news in news_total:
 i = 0
 for news in news_list:
     if(i == 0):
-        data_set = '{"Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
+        data_set = '{"NewsLink":"'+news.link+'", "Image":"'+news.image+'", "Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
         i = i + 1
     else:
-        data_set = ',{"Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
+        data_set = ',{"NewsLink":"'+news.link+'", "Image":"'+news.image+'", "Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
     data = data + data_set
 
 data = data + "]"
 json_dump = json.dumps(data)
-print(data.encode('utf-8'))
+print(json_dump)
 exit()
