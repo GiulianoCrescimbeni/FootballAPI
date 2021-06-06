@@ -120,6 +120,27 @@ module.exports = function (api, con, path) {
     });
   });
 
+  //News//
+  api.get("/:championship/news/", (req, res, next) => {
+    //Use python shell//
+    const {PythonShell} = require("python-shell");
+
+    let options = {
+      mode: 'text',
+      path: '/FootballScraper/',
+      pythonOptions: ['-u'], // get print results in real-time
+      args: [squadToURL(req.params.championship)]
+    };
+
+    PythonShell.run('NewsChampionshipScraper.py', options, function (err, data) {
+      if (err) throw err;
+      var data = JSON.stringify(data);
+      data = data.replace(/\\/g, '');
+      data = data.substring(1)
+      res.json(JSON.parse(data));
+    });
+  });
+
   //Today Matches//
 
   }

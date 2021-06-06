@@ -1,0 +1,69 @@
+import bs4
+import requests
+import sched
+import time
+import json
+import sys
+from urllib.request import urlopen as uReq
+from bs4 import BeautifulSoup as soup
+
+class News:
+    #Squad Class#
+    def __init__(self, link, image, title, preview, publisherName, publisherDate):
+        self.link           = link
+        self.image          = image
+        self.title          = title
+        self.preview        = preview
+        self.publisherName  = publisherName
+        self.publisherDate  = publisherDate
+
+#Getting the name of the championship#
+championship = str(sys.argv[1])
+
+#Opening the connection with the site#
+uClient = uReq("https://onefootball.com/en/competition/"+championship)
+page_html = uClient.read()
+uClient.close()
+
+#Souping the page and getting data#
+page_soup = soup(page_html,"html.parser")
+news_total = page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
+news_list = []
+data = "["
+counter = 0
+
+for news in news_total:
+    counter = counter + 1
+    #Scraping data from the hmtl#
+    news_link_container = news.find("a", {"class":"teaser__link"})
+    news_link = news_link_container.href
+
+    image_container = news.find("picture", {"class":"of-image__picture"})
+    image = image_container.source.srcset
+
+    title_container = news.find("h3", {"class":"teaser__title"})
+    title = title_container.text
+    preview_container = news.find("p", {"class":"teaser__preview"})
+    preview = preview_container.text
+
+    publisher_name_container = news.find("span", {"class":"publisher__name"})
+    publisher_name = publisher_name_container.text
+    publisher_date_container = news.find("time", {"class":"publisher__time"})
+    publisher_date = publisher_date_container.text
+
+    news_class = News(news_link, image, title, preview, publisher_name, publisher_date)
+    news_list.append(news_class)
+
+i = 0
+for news in news_list:
+    if(i == 0):
+        data_set = '{"Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
+        i = i + 1
+    else:
+        data_set = ',{"Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
+    data = data + data_set
+
+data = data + "]"
+json_dump = json.dumps(data)
+print(data.encode('utf-8'))
+exit()

@@ -18,8 +18,8 @@ class Squad:
         self.loose    = loose
         self.tie      = tie
 
-#Getting the name of the squad#
-squad_name_url = str(sys.argv[1])
+#Getting the name of the championship#
+championship = str(sys.argv[1])
 
 #Getting filters#
 is_filtered = len(sys.argv) > 2
@@ -29,7 +29,7 @@ if is_filtered:
     value = filters[1]
 
 #Opening the connection with the site#
-uClient = uReq("https://onefootball.com/it/competizione/"+squad_name_url+"/classifica")
+uClient = uReq("https://onefootball.com/en/competition/"+championship+"/table")
 page_html = uClient.read()
 uClient.close()
 
@@ -57,6 +57,7 @@ for squad in squads:
     squad_loose = squad_stats[3].text
     squad_tie = squad_stats[4].text
 
+    #Checking Parameters and adding the squad in the squad list#
     if(is_filtered):
         if(parameter == "position"):
             if(squad_position == value):
@@ -97,6 +98,7 @@ for squad in squads:
 #                data_set = '{ "Position":"'+squad_position+'", "Name":"'+squad_name+'", "Points":"'+squad_points+'", "Played":"'+squad_played+'", "Winned":"'+squad_win+'", "Loosed":"'+squad_loose+'", "Tie":"'+squad_tie+'"}'
 #                data = data + data_set
 
+#Printing all the data#
 i = 0
 for squad in squads_list:
     if(i == 0):
