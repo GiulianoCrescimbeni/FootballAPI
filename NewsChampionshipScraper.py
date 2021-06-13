@@ -8,7 +8,7 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 
 class News:
-    #Squad Class#
+    #News Class#
     def __init__(self, link, image, title, preview, publisherName, publisherDate):
         self.link           = link
         self.image          = image

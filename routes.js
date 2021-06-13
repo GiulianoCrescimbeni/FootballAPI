@@ -147,6 +147,24 @@ module.exports = function (api, con, path) {
     });
   });
 
+  //Results//
+  api.get("/:championship/results/", (req, res, next) => {
+    //Use python shell//
+    const {PythonShell} = require("python-shell");
+
+    let options = {
+      mode: 'text',
+      path: '/FootballScraper/',
+      pythonOptions: ['-u'], // get print results in real-time
+      args: [squadToURL(req.params.championship)]
+    };
+
+    PythonShell.run('ResultsScraper.py', options, function (err, data) {
+      if (err) throw err;
+      res.json(JSON.parse(JSON.parse(data)));
+    });
+  });
+
   //Today Matches//
 
   }
