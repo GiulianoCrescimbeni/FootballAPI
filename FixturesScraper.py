@@ -6,24 +6,14 @@ import json
 import sys
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
-#from selenium import webdriver
-#from selenium.webdriver.common.keys import Keys
-
 
 #Getting the name of the championship#
 championship = str(sys.argv[1])
 
 #Opening the connection with the site#
-uClient = uReq("https://onefootball.com/en/competition/"+championship+"/results/")
+uClient = uReq("https://onefootball.com/en/competition/"+championship+"/fixtures/")
 page_html = uClient.read()
 uClient.close()
-
-# Start web browser #
-#browser = webdriver.Chrome('./chromedriver')
-
-# Get source code #
-#browser.get("https://onefootball.com/en/competition/"+championship+"/results/")
-#page_html = browser.page_source
 
 #Souping the page and getting data#
 page_soup = soup(page_html,"html.parser")
@@ -50,17 +40,13 @@ for days in matches_day:
         squad1_name = squad_name[0].text
         squad2_name = squad_name[1].text
 
-        squad_goals = match.findAll("span", {"class":"title-7-bold simple-match-card-team__score"})
-        squad1_goals = squad_goals[0].text
-        squad2_goals = squad_goals[1].text
-
-        match_date_container = match.find("time", {"class":"title-8-bold simple-match-card__info-message--secondary"})
+        match_date_container = match.find("time", {"class":"title-8-bold"})
         match_date = match_date_container.text
 
         if(i == 0):
-            data = data + '{"homeTeam":"'+ squad1_name +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
+            data = data + '{"homeTeam":"'+ squad1_name +'","awayTeam":"'+squad2_name+'","MatchDay":"'+match_date+'"}'
         else:
-            data = data + ',{"homeTeam":"'+ squad1_name +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
+            data = data + ',{"homeTeam":"'+ squad1_name +'","awayTeam":"'+squad2_name+'","MatchDay":"'+match_date+'"}'
         i = i + 1
     data = data + "]"
 

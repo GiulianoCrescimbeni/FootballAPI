@@ -43,15 +43,15 @@ counter = 0
 for squad in squads:
     counter = counter + 1
     #Scraping data from the hmtl#
-    squad_stats = squad.findAll("span", {"class":"title-7-regular"})
-    squad_position = squad_stats[0].text
+    squad_position_container = squad.find("span", {"class":"title-7-bold"})
+    squad_position = squad_position_container.text
 
-    squad_name_container = squad.find("p", {"class":"title-7-regular standings__team-name"})
+    squad_name_container = squad.find("p", {"class":"title-7-medium standings__team-name"})
     squad_name = squad_name_container.text
 
-    squad_points_container = squad.find("span", {"class":"title-7-bold"})
-    squad_points = squad_points_container.text
+    squad_stats = squad.findAll("span", {"class":"title-7-medium standings__cell-text--dimmed"})
 
+    squad_points = squad_stats[0].text
     squad_played = squad_stats[1].text
     squad_win = squad_stats[2].text
     squad_loose = squad_stats[3].text
