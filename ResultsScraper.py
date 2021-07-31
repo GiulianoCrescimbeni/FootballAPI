@@ -46,6 +46,9 @@ for days in matches_day:
     matches_list = []
     i = 0
     for match in matches:
+        squad_logo_container = match.findAll("div", {"class":"of-image"})
+        squad1_logo = squad_logo_container[0].find("source", attrs = {'srcset' : True})['srcset']
+        squad2_logo = squad_logo_container[1].find("source", attrs = {'srcset' : True})['srcset']
         squad_name = match.findAll("span", {"class":"title-8-medium simple-match-card-team__name"})
         squad1_name = squad_name[0].text
         squad2_name = squad_name[1].text
@@ -58,9 +61,9 @@ for days in matches_day:
         match_date = match_date_container.text
 
         if(i == 0):
-            data = data + '{"homeTeam":"'+ squad1_name +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
+            data = data + '{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
         else:
-            data = data + ',{"homeTeam":"'+ squad1_name +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
+            data = data + ',{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
         i = i + 1
     data = data + "]"
 

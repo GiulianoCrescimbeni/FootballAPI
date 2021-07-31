@@ -9,11 +9,12 @@ from bs4 import BeautifulSoup as soup
 
 class News:
     #News Class#
-    def __init__(self, link, image, title, preview, publisherName, publisherDate):
+    def __init__(self, link, image, title, preview, publisherLogo, publisherName, publisherDate):
         self.link           = link
         self.image          = image
         self.title          = title
         self.preview        = preview
+        self.publisherLogo  = publisherLogo
         self.publisherName  = publisherName
         self.publisherDate  = publisherDate
 
@@ -26,13 +27,13 @@ page_html = uClient.read()
 uClient.close()
 
 #Souping the page and getting data#
-page_soup = soup(page_html,"html.parser")
-news_total = page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--xl gallery__teaser--tablet-landscape--xl gallery__teaser--tablet-portrait--xl gallery__teaser--mobile--xl"})
-news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--lg gallery__teaser--tablet-landscape--lg gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
-news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
-news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--sm gallery__teaser--mobile--xs"})
-news_total = news_total + page_soup.findAll("of-news-teaser-deprecated", {"class":"gallery__teaser gallery__teaser--desktop--md gallery__teaser--tablet-landscape--md gallery__teaser--tablet-portrait--sm gallery__teaser--mobile--xs"})
-news_list = []
+page_soup   = soup(page_html,"html.parser")
+news_total  = page_soup.findAll("of-news-teaser", {"class":"gallery__teaser gallery__teaser--desktop--xl gallery__teaser--tablet-landscape--xl gallery__teaser--tablet-portrait--xl gallery__teaser--mobile--xl"})
+news_total  = news_total + page_soup.findAll("of-news-teaser", {"class":"gallery__teaser gallery__teaser--desktop--lg gallery__teaser--tablet-landscape--lg gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
+news_total  = news_total + page_soup.findAll("of-news-teaser", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--md gallery__teaser--mobile--xs"})
+news_total  = news_total + page_soup.findAll("of-news-teaser", {"class":"gallery__teaser gallery__teaser--desktop--sm gallery__teaser--tablet-landscape--sm gallery__teaser--tablet-portrait--sm gallery__teaser--mobile--xs"})
+news_total  = news_total + page_soup.findAll("of-news-teaser", {"class":"gallery__teaser gallery__teaser--desktop--md gallery__teaser--tablet-landscape--md gallery__teaser--tablet-portrait--sm gallery__teaser--mobile--xs"})
+news_list   = []
 data = "["
 counter = 0
 
@@ -50,21 +51,23 @@ for news in news_total:
     preview_container = news.find("p", {"class":"teaser__preview"})
     preview = preview_container.text
 
+    publisher_logo_container = news.find("of-image", {"class":"publisher__image"})
+    publisher_logo = publisher_logo_container.find("source", attrs = {'srcset' : True})['srcset']
     publisher_name_container = news.find("span", {"class":"publisher__name"})
     publisher_name = publisher_name_container.text
     publisher_date_container = news.find("time", {"class":"publisher__time"})
     publisher_date = publisher_date_container.text
 
-    news_class = News(news_link, image, title, preview, publisher_name, publisher_date)
+    news_class = News(news_link, image, title, preview, publisher_logo, publisher_name, publisher_date)
     news_list.append(news_class)
 
 i = 0
 for news in news_list:
     if(i == 0):
-        data_set = '{"NewsLink":"'+news.link+'", "Image":"'+news.image+'", "Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
+        data_set = '{"NewsLink":"'+news.link+'", "Image":"'+news.image+'", "Title":"'+news.title+'", "PublisherLogo":"'+news.publisherLogo+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
         i = i + 1
     else:
-        data_set = ',{"NewsLink":"'+news.link+'", "Image":"'+news.image+'", "Title":"'+news.title+'", "Preview":"'+news.preview+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
+        data_set = ',{"NewsLink":"'+news.link+'", "Image":"'+news.image+'", "Title":"'+news.title+'", "PublisherLogo":"'+news.publisherLogo+'", "PublisherName":"'+news.publisherName+'", "PublisherDate":"'+news.publisherDate+'"}'
     data = data + data_set
 
 data = data + "]"
