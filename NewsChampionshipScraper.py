@@ -43,19 +43,18 @@ for news in news_total:
     news_link_container = news.find("a", href=True)
     news_link = "https://onefootball.com" + news_link_container['href']
 
-    image_container = news.find("source", attrs = {'srcset' : True})
-    image = image_container['srcset']
+    image = news.find("img", attrs = {'src' : True})['src']
 
     title_container = news.find("h3", {"class":"teaser__title"})
     title = title_container.text
     preview_container = news.find("p", {"class":"teaser__preview"})
     preview = preview_container.text
 
-    publisher_logo_container = news.find("of-image", {"class":"publisher__image"})
-    publisher_logo = publisher_logo_container.find("source", attrs = {'srcset' : True})['srcset']
-    publisher_name_container = news.find("span", {"class":"publisher__name"})
+    publisher_container = news.find("footer", {"class":"teaser__publisher publisher text-5"})
+    publisher_logo = publisher_container.find("img", attrs = {'src' : True})['src']
+    publisher_name_container = publisher_container.find("span", {"class":"publisher__name"})
     publisher_name = publisher_name_container.text
-    publisher_date_container = news.find("time", {"class":"publisher__time"})
+    publisher_date_container = publisher_container.find("time", {"class":"publisher__time"})
     publisher_date = publisher_date_container.text
 
     news_class = News(news_link, image, title, preview, publisher_logo, publisher_name, publisher_date)

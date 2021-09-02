@@ -48,7 +48,7 @@ for squad in squads:
     squad_position = squad_position_container.text
 
     squad_logo_container = squad.find("of-image", {"class":"entity-logo"})
-    squad_logo = squad_logo_container.find("source", attrs = {'srcset' : True})['srcset']
+    squad_logo = squad_logo_container.find("img", attrs = {'src' : True})['src']
 
     squad_name_container = squad.find("p", {"class":"title-7-medium standings__team-name"})
     squad_name = squad_name_container.text

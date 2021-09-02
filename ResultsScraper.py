@@ -27,14 +27,14 @@ uClient.close()
 
 #Souping the page and getting data#
 page_soup = soup(page_html,"html.parser")
-matches_day = page_soup.findAll("of-xpa-switch-entity-deprecated", {"class":"entity-page-root__item entity-page-root__item--simple-match-cards-list"})
+matches_day = page_soup.findAll("of-match-cards-list")
 matchesDays_list = []
 data = "[{"
 first = 1
 
 for days in matches_day:
     
-    match_day_container = days.find("p", {"class":"label simple-match-cards-list__title-deprecated"}) 
+    match_day_container = days.find("h3", {"class":"title-7-medium section-header__subtitle"}) 
     match_day = match_day_container.text
     if(first == 1):
         data = data + '"' + match_day + '" : ['
@@ -47,8 +47,8 @@ for days in matches_day:
     i = 0
     for match in matches:
         squad_logo_container = match.findAll("div", {"class":"of-image"})
-        squad1_logo = squad_logo_container[0].find("source", attrs = {'srcset' : True})['srcset']
-        squad2_logo = squad_logo_container[1].find("source", attrs = {'srcset' : True})['srcset']
+        squad1_logo = squad_logo_container[0].find("img", attrs = {'src' : True})['src']
+        squad2_logo = squad_logo_container[1].find("img", attrs = {'src' : True})['src']
         squad_name = match.findAll("span", {"class":"title-8-medium simple-match-card-team__name"})
         squad1_name = squad_name[0].text
         squad2_name = squad_name[1].text
