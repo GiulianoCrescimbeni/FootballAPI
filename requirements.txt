@@ -1,1 +1,16 @@
-BeautifulSoup4==4.9.3
+backports.entry-points-selectable==1.1.0
+beautifulsoup4==4.9.3
+certifi==2020.12.5
+chardet==4.0.0
+distlib==0.3.3
+filelock==3.3.1
+idna==2.10
+mysql-connector-python-rf==2.2.2
+pipenv==2021.5.29
+platformdirs==2.4.0
+requests==2.25.1
+six==1.15.0
+soupsieve==2.1
+urllib3==1.26.3
+virtualenv==20.9.0
+virtualenv-clone==0.5.7
