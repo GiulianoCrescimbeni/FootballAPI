@@ -18,6 +18,7 @@ uClient.close()
 #Souping the page and getting data#
 page_soup = soup(page_html,"html.parser")
 matches_day = page_soup.findAll("of-match-cards-list")
+matches_day.pop(0)
 matchesDays_list = []
 data = "[{"
 first = 1

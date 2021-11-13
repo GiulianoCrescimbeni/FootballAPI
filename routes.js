@@ -1,4 +1,4 @@
-module.exports = function (api, con, path) {
+module.exports = function (api, path) {
 
   function squadToURL(squadName) {
     switch (squadName) {
@@ -21,7 +21,6 @@ module.exports = function (api, con, path) {
     }
   }
 
-  
   function decodeUtf8(bytes) {
     var encoded = "";
     for (var i = 0; i < bytes.length; i++) {
@@ -86,46 +85,6 @@ module.exports = function (api, con, path) {
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
       if (err) throw err;
       res.json(JSON.parse(JSON.parse(data)));
-    });
-  });
-
-  //Scorers Routes//
-  //General scorers getter//
-  api.get("/:championship/scorers", (req, res, next) => {
-    squadName = squadToTable(req.params.championship);
-    con.query("SELECT * FROM "+squadName+"_scorers", function(err, result, fields) {
-      if(result) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(result);
-      } else {
-        res.json("No scorers found");
-      }
-    });
-  });
-
-  //Scorer from name//
-  api.get("/:championship/scorername/:scorername", (req, res, next) => {
-    squadName = squadToTable(req.params.championship);
-    con.query("SELECT * FROM "+squadName+"_scorers WHERE player_name LIKE '%" + req.params.scorername + "%'", function(err, result, fields) {
-      if(result) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(result);
-      } else {
-        res.json("No scorers found");
-      }
-    });
-  });
-
-  //Scorer from position//
-  api.get("/:championship/scorerposition/:scorerposition", (req, res, next) => {
-    squadName = squadToTable(req.params.championship);
-    con.query("SELECT * FROM "+squadName+"_scorers WHERE player_position = '" + req.params.scorerposition + "'", function(err, result, fields) {
-      if(result) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(result);
-      } else {
-        res.json("No scorers found");
-      }
     });
   });
 
