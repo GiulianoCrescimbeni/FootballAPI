@@ -31,7 +31,7 @@ module.exports = function (api, path) {
 
   //Squads Routes//
   //General squad getter//
-  api.get("/:championship/", (req, res, next) => {
+  api.get("/:championship/table", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
 
