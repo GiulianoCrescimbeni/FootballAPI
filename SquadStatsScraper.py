@@ -9,15 +9,16 @@ from bs4 import BeautifulSoup as soup
 
 class Squad:
     #Squad Class#
-    def __init__(self, position, logo, name, points, played, win, loose, tie):
+    def __init__(self, position, logo, name, points, played, win, loose, tie, gd):
         self.position   = position
-        self.logo  = logo
+        self.logo       = logo
         self.name       = name
         self.points     = points
         self.played     = played
         self.win        = win
         self.loose      = loose
         self.tie        = tie
+        self.gd         = gd
 
 #Getting the name of the championship#
 championship = str(sys.argv[1])
@@ -53,26 +54,28 @@ for squad in squads:
     squad_name_container = squad.find("p", {"class":"title-7-medium standings__team-name"})
     squad_name = squad_name_container.text
 
-    squad_stats = squad.findAll("span", {"class":"title-7-medium standings__cell-text--dimmed"})
+    squad_stats = squad.findAll("span", {"class":"title-7-medium standings__cell-text--dimmed"}) + squad.findAll("span", {"class":"title-7-bold"})
 
-    squad_points = squad_stats[0].text
-    squad_played = squad_stats[1].text
-    squad_win = squad_stats[2].text
+    squad_played = squad_stats[0].text
+    squad_win = squad_stats[1].text
     squad_loose = squad_stats[3].text
-    squad_tie = squad_stats[4].text
+    squad_tie = squad_stats[2].text
+    squad_gd = squad_stats[4].text
+
+    squad_points = squad_stats[6].text
 
     #Checking Parameters and adding the squad in the squad list#
     if(is_filtered):
         if(parameter == "position"):
             if(squad_position == value):
-                squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie)
+                squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie, squad_gd)
                 squads_list.append(squad_class)
         elif(parameter == "name"):
             if(squad_name.upper().find(value.upper()) != -1):
-                squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie)
+                squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie, squad_gd)
                 squads_list.append(squad_class)
     else:
-        squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie)
+        squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie, squad_gd)
         squads_list.append(squad_class)
 
 #    if(parameter == "position"):
@@ -106,10 +109,10 @@ for squad in squads:
 i = 0
 for squad in squads_list:
     if(i == 0):
-        data_set = '{"Position":"'+squad.position+'", "SquadLogo":"'+squad.logo+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
+        data_set = '{"Position":"'+squad.position+'", "SquadLogo":"'+squad.logo+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'", "Goal Difference":"'+squad.gd+'"}'
         i = i + 1
     else:
-        data_set = ',{"Position":"'+squad.position+'", "SquadLogo":"'+squad.logo+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'"}'
+        data_set = ',{"Position":"'+squad.position+'", "SquadLogo":"'+squad.logo+'", "Name":"'+squad.name+'", "Points":"'+squad.points+'", "Played":"'+squad.played+'", "Winned":"'+squad.win+'", "Loosed":"'+squad.loose+'", "Tie":"'+squad.tie+'", "Goal Difference":"'+squad.gd+'"}'
     data = data + data_set
 
 data = data + "]"
