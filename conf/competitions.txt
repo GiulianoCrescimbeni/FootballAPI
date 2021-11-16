@@ -1,0 +1,5 @@
+seriea:serie-a-13
+bundesliga:bundesliga-1
+premierleague:premier-league-9
+ligue1:ligue-1-uber-eats-23
+liga:laliga-10

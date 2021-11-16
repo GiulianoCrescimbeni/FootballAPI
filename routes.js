@@ -1,24 +1,17 @@
-module.exports = function (api, path) {
+module.exports = function (api, path, fs) {
 
-  function squadToURL(squadName) {
-    switch (squadName) {
-      case "seriea":
-        return "serie-a-13";
-        break;
-      case "bundesliga":
-        return "bundesliga-1"
-        break
-      case "premierleague":
-        return "premier-league-9";
-        break
-      case "ligue1":
-        return "ligue-1-uber-eats-23";
-        break;
-      case "liga":
-        return "laliga-10";
-        break;
-      default: "null"
+  function competitionToURL(squadName) {
+    var data =fs.readFileSync('conf/competitions.txt', 'utf8')
+    var tuples = data.split("\n");
+
+    for(i = 0; i < tuples.length; i++) {
+      var tuple = tuples[i].split(":");
+      if(squadName == tuple[0]) {
+        return tuple[1];
+      }
     }
+
+    return "null";
   }
 
   function decodeUtf8(bytes) {
@@ -39,7 +32,7 @@ module.exports = function (api, path) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [squadToURL(req.params.championship)]
+      args: [competitionToURL(req.params.championship)]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
@@ -59,7 +52,7 @@ module.exports = function (api, path) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [squadToURL(req.params.championship), filters]
+      args: [competitionToURL(req.params.championship), filters]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
@@ -79,7 +72,7 @@ module.exports = function (api, path) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [squadToURL(req.params.championship), filters]
+      args: [competitionToURL(req.params.championship), filters]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
@@ -97,7 +90,7 @@ module.exports = function (api, path) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [squadToURL(req.params.championship)]
+      args: [competitionToURL(req.params.championship)]
     };
 
     PythonShell.run('NewsChampionshipScraper.py', options, function (err, data) {
@@ -115,7 +108,7 @@ module.exports = function (api, path) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [squadToURL(req.params.championship)]
+      args: [competitionToURL(req.params.championship)]
     };
 
     PythonShell.run('ResultsScraper.py', options, function (err, data) {
@@ -133,7 +126,7 @@ module.exports = function (api, path) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [squadToURL(req.params.championship)]
+      args: [competitionToURL(req.params.championship)]
     };
 
     PythonShell.run('FixturesScraper.py', options, function (err, data) {
