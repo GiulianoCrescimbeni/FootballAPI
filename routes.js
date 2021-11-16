@@ -27,12 +27,18 @@ module.exports = function (api, path, fs) {
   api.get("/:championship/table", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
 
     let options = {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [competitionToURL(req.params.championship)]
+      args: [competition]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
@@ -45,6 +51,12 @@ module.exports = function (api, path, fs) {
   api.get("/:championship/squadname/:squadName", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
 
     var filters = "name-" + req.params.squadName
 
@@ -52,7 +64,7 @@ module.exports = function (api, path, fs) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [competitionToURL(req.params.championship), filters]
+      args: [competition, filters]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
@@ -65,6 +77,12 @@ module.exports = function (api, path, fs) {
   api.get("/:championship/squadposition/:squadposition", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
 
     var filters = "position-" + req.params.squadposition
 
@@ -72,7 +90,7 @@ module.exports = function (api, path, fs) {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [competitionToURL(req.params.championship), filters]
+      args: [competition, filters]
     };
 
     PythonShell.run('SquadStatsScraper.py', options, function (err, data) {
@@ -85,12 +103,18 @@ module.exports = function (api, path, fs) {
   api.get("/:championship/news/", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
 
     let options = {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [competitionToURL(req.params.championship)]
+      args: [competition]
     };
 
     PythonShell.run('NewsChampionshipScraper.py', options, function (err, data) {
@@ -103,12 +127,18 @@ module.exports = function (api, path, fs) {
   api.get("/:championship/results/", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
 
     let options = {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [competitionToURL(req.params.championship)]
+      args: [competition]
     };
 
     PythonShell.run('ResultsScraper.py', options, function (err, data) {
@@ -121,12 +151,18 @@ module.exports = function (api, path, fs) {
   api.get("/:championship/fixtures/", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
 
     let options = {
       mode: 'text',
       path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
-      args: [competitionToURL(req.params.championship)]
+      args: [competition]
     };
 
     PythonShell.run('FixturesScraper.py', options, function (err, data) {
