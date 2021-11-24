@@ -171,6 +171,28 @@ module.exports = function (api, path, fs) {
     });
   });
 
+  //List of all competitions//
+  api.get("/competitions", (req, res, next) => {
+
+    var competitions = "{"
+    
+    var data =fs.readFileSync('conf/competitions.txt', 'utf8')
+    var tuples = data.split("\n");
+
+    for(i = 0; i < tuples.length; i++) {
+      var tuple = tuples[i].split(":");
+      if(i == 0) {
+        competitions = competitions + tuple[0];
+      } else {
+        competitions = competitions + ',' + tuple[0];
+      }
+    }
+
+    competitions = competitions + "}";
+    res.json(competitions);
+    
+  });
+
   //Today Matches//
 
   }

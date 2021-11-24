@@ -57,7 +57,13 @@ for days in matches_day:
         squad1_goals = squad_goals[0].text
         squad2_goals = squad_goals[1].text
 
-        match_date_container = match.find("time", {"class":"title-8-bold simple-match-card__info-message--secondary"})
+        match_date_container = match.find("time", {"class":"title-8-bold simple-match-card__info-message--secondary"}) 
+        if (match_date_container is None):
+            match_date_container = match.find("time", {"class":"title-8-bold"})
+        if (match_date_container is None):
+            match_date_container = match.find("span", {"class":"title-8-bold simple-match-card__info-message--secondary"})
+        if (match_date_container is None):
+            match_date_container = match.find("span", {"class":"title-8-medium simple-match-card__warning-message"})
         match_date = match_date_container.text
 
         if(i == 0):
