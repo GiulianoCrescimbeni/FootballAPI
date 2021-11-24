@@ -1,6 +1,8 @@
 var express = require("express");
 var mysql = require("mysql");
 var path = require("path");
+var fs = require('fs')
+
 var PORT = process.env.PORT || 3000
 
 var api = express();
@@ -17,4 +19,4 @@ api.get('/index.html',function(req,res){
 });
 
 api.use(express.static(__dirname));
-require('./routes.js')(api, path);
+require('./routes.js')(api, path, fs);
