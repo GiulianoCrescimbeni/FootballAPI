@@ -48,7 +48,7 @@ module.exports = function (api, path, fs) {
   });
 
   //Squad from squad name//
-  api.get("/:championship/squadname/:squadName", (req, res, next) => {
+  api.get("/:championship/table/squadname/:squadName", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
     var competition = competitionToURL(req.params.championship)
@@ -74,7 +74,7 @@ module.exports = function (api, path, fs) {
   });
 
   //Squad from squad position//
-  api.get("/:championship/squadposition/:squadposition", (req, res, next) => {
+  api.get("/:championship/table/squadposition/:squadposition", (req, res, next) => {
     //Use python shell//
     const {PythonShell} = require("python-shell");
     var competition = competitionToURL(req.params.championship)
