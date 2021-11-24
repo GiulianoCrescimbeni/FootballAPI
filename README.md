@@ -4,3 +4,4 @@
 * Added News Feature
 * Added Results and Fixtures Features
 * Logo integration
+* Competitions Manager integration
