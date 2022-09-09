@@ -67,7 +67,6 @@ for squad in squads:
     #Checking Parameters and adding the squad in the squad list#
     if(is_filtered):
         if(parameter == "position"):
-            print(int(squad_position) == value)
             if(squad_position == value):
                 squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie, squad_gd)
                 squads_list.append(squad_class)
