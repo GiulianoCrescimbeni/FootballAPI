@@ -46,7 +46,7 @@ for squad in squads:
     counter = counter + 1
     #Scraping data from the hmtl#
     squad_position_container = squad.find("span", {"class":"title-7-bold"})
-    squad_position = squad_position_container.text
+    squad_position = squad_position_container.text.replace(" ","")
 
     squad_logo_container = squad.find("of-image", {"class":"entity-logo"})
     squad_logo = squad_logo_container.find("img", attrs = {'src' : True})['src']
@@ -67,6 +67,10 @@ for squad in squads:
     #Checking Parameters and adding the squad in the squad list#
     if(is_filtered):
         if(parameter == "position"):
+            print(squad_position)
+            print(1)
+            print(value)
+            print(int(squad_position) == value)
             if(squad_position == value):
                 squad_class = Squad(squad_position, squad_logo, squad_name, squad_points, squad_played, squad_win, squad_loose, squad_tie, squad_gd)
                 squads_list.append(squad_class)
