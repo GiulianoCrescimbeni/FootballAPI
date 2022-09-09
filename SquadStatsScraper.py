@@ -46,7 +46,7 @@ for squad in squads:
     counter = counter + 1
     #Scraping data from the hmtl#
     squad_position_container = squad.find("span", {"class":"title-7-bold"})
-    squad_position = squad_position_container.text
+    squad_position = squad_position_container.text.replace(" ","")
 
     squad_logo_container = squad.find("of-image", {"class":"entity-logo"})
     squad_logo = squad_logo_container.find("img", attrs = {'src' : True})['src']
