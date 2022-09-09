@@ -50,11 +50,11 @@ for news in news_total:
     preview_container = news.find("p", {"class":"teaser__preview"})
     preview = preview_container.text
 
-    publisher_container = news.find("footer", {"class":"teaser__publisher publisher text-5"})
+    publisher_container = news.find("footer", {"class":"teaser__publisher publisher"})
     publisher_logo = publisher_container.find("img", attrs = {'src' : True})['src']
-    publisher_name_container = publisher_container.find("span", {"class":"publisher__name"})
+    publisher_name_container = publisher_container.find("span", {"class":"teaser__publisher-name-text text-5"})
     publisher_name = publisher_name_container.text
-    publisher_date_container = publisher_container.find("time", {"class":"publisher__time"})
+    publisher_date_container = publisher_container.find("time", {"class":"publisher__time text-5"})
     publisher_date = publisher_date_container.text
 
     news_class = News(news_link, image, title, preview, publisher_logo, publisher_name, publisher_date)
