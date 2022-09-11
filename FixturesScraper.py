@@ -43,9 +43,11 @@ for days in matches_day:
         squad_name = match.findAll("span", {"class":"title-8-medium simple-match-card-team__name"})
         squad1_name = squad_name[0].text
         squad2_name = squad_name[1].text
-
         match_date_container = match.find("time", {"class":"title-8-bold"})
-        match_date = match_date_container.text
+        if not match_date_container:
+            match_date = "PostPoned"
+        else:
+            match_date = match_date_container.text
 
         if(i == 0):
             data = data + '{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","MatchDay":"'+match_date+'"}'
