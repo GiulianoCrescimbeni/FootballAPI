@@ -47,7 +47,7 @@ for days in matches_day:
         if not match_date_container:
             match_date = "PostPoned"
         else:
-            match_date = match_date_container.text
+            match_date = match_date_container.text.replace(" ","")
 
         if(i == 0):
             data = data + '{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","MatchDay":"'+match_date+'"}'

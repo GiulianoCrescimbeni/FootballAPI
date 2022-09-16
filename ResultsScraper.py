@@ -54,22 +54,22 @@ for days in matches_day:
         squad2_name = squad_name[1].text
 
         squad_goals = match.findAll("span", {"class":"title-7-bold simple-match-card-team__score"})
-        squad1_goals = squad_goals[0].text
-        squad2_goals = squad_goals[1].text
+        squad1_goals = squad_goals[0].text.replace(" ","")
+        squad2_goals = squad_goals[1].text.replace(" ","")
 
-        match_date_container = match.find("time", {"class":"title-8-bold simple-match-card__info-message--secondary"}) 
-        if (match_date_container is None):
-            match_date_container = match.find("time", {"class":"title-8-bold"})
-        if (match_date_container is None):
-            match_date_container = match.find("span", {"class":"title-8-bold simple-match-card__info-message--secondary"})
-        if (match_date_container is None):
-            match_date_container = match.find("span", {"class":"title-8-medium simple-match-card__warning-message"})
-        match_date = match_date_container.text
+        #match_date_container = match.find("time", {"class":"title-8-bold simple-match-card__info-message--secondary"}) 
+        #if (match_date_container is None):
+        #    match_date_container = match.find("time", {"class":"title-8-bold"})
+        #if (match_date_container is None):
+        #    match_date_container = match.find("span", {"class":"title-8-bold simple-match-card__info-message--secondary"})
+        #if (match_date_container is None):
+        #    match_date_container = match.find("span", {"class":"title-8-medium simple-match-card__warning-message"})
+        #match_date = match_date_container.text.replace(" ","")
 
         if(i == 0):
-            data = data + '{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
+            data = data + '{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'"}'
         else:
-            data = data + ',{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
+            data = data + ',{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'"}'
         i = i + 1
     data = data + "]"
 
