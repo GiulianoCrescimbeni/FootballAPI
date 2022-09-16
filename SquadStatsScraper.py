@@ -56,11 +56,11 @@ for squad in squads:
 
     squad_stats = squad.findAll("span", {"class":"title-7-medium standings__cell-text--dimmed"}) + squad.findAll("span", {"class":"title-7-bold"})
 
-    squad_played = squad_stats[0].text.text.replace(" ","")
-    squad_win = squad_stats[1].text.text.replace(" ","")
-    squad_loose = squad_stats[3].text.text.replace(" ","")
-    squad_tie = squad_stats[2].text.text.replace(" ","")
-    squad_gd = squad_stats[4].text.text.replace(" ","")
+    squad_played = squad_stats[0].text.replace(" ","")
+    squad_win = squad_stats[1].text.replace(" ","")
+    squad_loose = squad_stats[3].text.replace(" ","")
+    squad_tie = squad_stats[2].text.replace(" ","")
+    squad_gd = squad_stats[4].text.replace(" ","")
 
     squad_points = squad_stats[6].text
 
