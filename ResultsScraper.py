@@ -64,7 +64,7 @@ for days in matches_day:
             match_date_container = match.find("span", {"class":"title-8-bold simple-match-card__info-message--secondary"})
         if (match_date_container is None):
             match_date_container = match.find("span", {"class":"title-8-medium simple-match-card__warning-message"})
-        match_date = match_date_container.text.replace(" ","")
+        match_date = match_date_container.text
 
         if(i == 0):
             data = data + '{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","homeTeamScore":"'+squad1_goals+'","awayTeamScore":"'+squad2_goals+'","MatchDay":"'+match_date+'"}'
