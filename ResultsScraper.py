@@ -54,8 +54,8 @@ for days in matches_day:
         squad2_name = squad_name[1].text
 
         squad_goals = match.findAll("span", {"class":"title-7-bold simple-match-card-team__score"})
-        squad1_goals = squad_goals[0].text.replace(" ","")
-        squad2_goals = squad_goals[1].text.replace(" ","")
+        squad1_goals = squad_goals[0].text
+        squad2_goals = squad_goals[1].text
 
         match_date_container = match.find("time", {"class":"title-8-bold simple-match-card__info-message--secondary"}) 
         if (match_date_container is None):
