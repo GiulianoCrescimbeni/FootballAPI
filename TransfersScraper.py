@@ -21,7 +21,7 @@ uClient.close()
 #Souping the page and getting data#
 page_soup = soup(page_html,"html.parser")
 transfers = page_soup.findAll("of-transfer-card")
-data = "[{"
+data = "["
 i = 0
 
 for transfer in transfers:
@@ -53,12 +53,12 @@ for transfer in transfers:
         transfer_price = ""
         
     if(i == 0):
-        data = data + '{"transferType":"'+ transfer_type +'","transferDate":"'+ transfer_date +'","playerName":"'+ transfer_player_name +'","playerRole":"'+transfer_player_role+'",""oldClub:"'+transfer_old_club+'","newClub":"'+transfer_new_club+'","price":"'+transfer_price+'","renewal":"'+transfer_renewal+'"}'
+        data = data + '{"transferType":"'+ transfer_type +'","transferDate":"'+ transfer_date +'","playerName":"'+ transfer_player_name +'","playerRole":"'+transfer_player_role+'","oldClub":"'+transfer_old_club+'","newClub":"'+transfer_new_club+'","price":"'+transfer_price+'","renewal":"'+transfer_renewal+'"}'
     else:
-        data = data + ',{"transferType":"'+ transfer_type +'","transferDate":"'+ transfer_date +'","playerName":"'+ transfer_player_name +'","playerRole":"'+transfer_player_role+'",""oldClub:"'+transfer_old_club+'","newClub":"'+transfer_new_club+'","price":"'+transfer_price+'","renewal":"'+transfer_renewal+'"}'
+        data = data + ',{"transferType":"'+ transfer_type +'","transferDate":"'+ transfer_date +'","playerName":"'+ transfer_player_name +'","playerRole":"'+transfer_player_role+'","oldClub":"'+transfer_old_club+'","newClub":"'+transfer_new_club+'","price":"'+transfer_price+'","renewal":"'+transfer_renewal+'"}'
     i = i + 1
 
-data = data + "}]"
+data = data + "]"
 json_dump = json.dumps(data)
 print(json_dump)
 exit()
