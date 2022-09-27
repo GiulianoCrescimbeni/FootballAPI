@@ -171,6 +171,30 @@ module.exports = function (api, path, fs) {
     });
   });
 
+  //Transfers//
+  api.get("/:championship/transfers/", (req, res, next) => {
+    //Use python shell//
+    const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
+
+    let options = {
+      mode: 'text',
+      path: '/FootballScraper/',
+      pythonOptions: ['-u'], // get print results in real-time
+      args: [competition]
+    };
+
+    PythonShell.run('TransfersScraper.py', options, function (err, data) {
+      if (err) throw err;
+      res.json(JSON.parse(JSON.parse(data)));
+    });
+  });
+
   //List of all competitions//
   api.get("/competitions", (req, res, next) => {
 
