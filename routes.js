@@ -36,8 +36,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
@@ -62,8 +62,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition, filters]
     };
 
@@ -88,8 +88,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition, filters]
     };
 
@@ -112,8 +112,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
@@ -136,8 +136,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
@@ -160,12 +160,36 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
     PythonShell.run('FixturesScraper.py', options, function (err, data) {
+      if (err) throw err;
+      res.json(JSON.parse(JSON.parse(data)));
+    });
+  });
+
+  //Transfers//
+  api.get("/:championship/transfers/", (req, res, next) => {
+    //Use python shell//
+    const {PythonShell} = require("python-shell");
+    var competition = competitionToURL(req.params.championship)
+
+    if(competition == "null") {
+      res.json("Competition not found")
+      return
+    }
+
+    let options = {
+      mode: 'text',
+      pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
+      args: [competition]
+    };
+
+    PythonShell.run('TransfersScraper.py', options, function (err, data) {
       if (err) throw err;
       res.json(JSON.parse(JSON.parse(data)));
     });
