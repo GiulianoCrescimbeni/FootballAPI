@@ -36,8 +36,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
@@ -62,8 +62,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition, filters]
     };
 
@@ -88,8 +88,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition, filters]
     };
 
@@ -112,8 +112,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
@@ -136,8 +136,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
@@ -160,8 +160,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
@@ -184,8 +184,8 @@ module.exports = function (api, path, fs) {
 
     let options = {
       mode: 'text',
-      path: '/FootballScraper/',
       pythonOptions: ['-u'], // get print results in real-time
+        scriptPath: 'DataScrapers/',
       args: [competition]
     };
 
