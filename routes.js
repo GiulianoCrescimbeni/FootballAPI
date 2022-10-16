@@ -199,10 +199,18 @@ module.exports = function (api, path, fs) {
   api.get("/competitions", (req, res, next) => {
 
     var competitions = "{"
+    var alphabet="abcdefghijklmnopqrstuvw";
+    var counter = 0;
     
     var data =fs.readFileSync('conf/competitions.txt', 'utf8')
     var tuples = data.split("\n");
 
+    for(i = 0; i < tuples.lenght; i++) {
+      if(tuple == "\n") {
+        competitions = competitions + '"' + alphabet[counter] + '":[{'
+      }
+    }
+    /*
     for(i = 0; i < tuples.length; i++) {
       var tuple = tuples[i].split(":");
       if(i == 0) {
@@ -210,7 +218,7 @@ module.exports = function (api, path, fs) {
       } else {
         competitions = competitions + ',' + tuple[0];
       }
-    }
+    } */
 
     competitions = competitions + "}";
     res.json(competitions);
