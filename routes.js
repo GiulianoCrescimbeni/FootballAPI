@@ -199,10 +199,10 @@ module.exports = function (api, path, fs) {
   api.get("/competitions", (req, res, next) => {
 
     var competitions = "{"
-    
+
     var data =fs.readFileSync('conf/competitions.txt', 'utf8')
     var tuples = data.split("\n");
-
+    
     for(i = 0; i < tuples.length; i++) {
       var tuple = tuples[i].split(":");
       if(i == 0) {

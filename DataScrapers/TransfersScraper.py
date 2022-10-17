@@ -31,7 +31,7 @@ for transfer in transfers:
 
     transfer_content_container = transfer.find("div", {"class":"transfer-card__content"})
     transfer_content_player_container = transfer_content_container.find("div", {"class":"transfer-card__content-player-info"})
-    transfer_player_name = transfer_content_player_container.find("p", {"class":"title-7-bold transfer-card__content-player-info-name"}).text
+    transfer_player_name = transfer_content_player_container.find("p", {"class":"title-7-bold transfer-card__content-player-info-name"}).text[1:-1]
     transfer_player_role = transfer_content_player_container.find("p", {"class":"title-8-regular transfer-card__content-player-info-position"}).text.replace(" ","")
     #transfer_squad_logo_container = transfer_content_container.find("of-entity-logo", {"class":"transfer-card__content-team"})
     #transfer_squad_logo = transfer_squad_logo_container.find("img", {"class":"of-image__img"})['src']
@@ -39,8 +39,8 @@ for transfer in transfers:
     transfer_renewal_container = transfer.find("p", {"class":"transfer-card__renewal-content"})
     if not transfer_renewal_container:
         transfer_secondary_content_container = transfer.find("div", {"class":"transfer-card__secondary-content"})
-        transfer_old_club = transfer_secondary_content_container.find("p", {"class":"title-8-regular transfer-card__secondary-content-old-team"}).text
-        transfer_new_club = transfer_secondary_content_container.find("p", {"class":"title-8-regular transfer-card__secondary-content-new-team"}).text
+        transfer_old_club = transfer_secondary_content_container.find("p", {"class":"title-8-regular transfer-card__secondary-content-old-team"}).text[1:-1]
+        transfer_new_club = transfer_secondary_content_container.find("p", {"class":"title-8-regular transfer-card__secondary-content-new-team"}).text[1:-1]
         
         transfer_card_footer = transfer.find("div", {"class":"transfer-card__footer"})
         transfer_price = transfer_card_footer.find("p", {"class":"title-8-bold transfer-card__footer-content"}).text.replace(" ","")

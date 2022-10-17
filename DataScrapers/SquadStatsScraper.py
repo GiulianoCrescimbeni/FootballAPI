@@ -52,7 +52,7 @@ for squad in squads:
     squad_logo = squad_logo_container.find("img", attrs = {'src' : True})['src']
 
     squad_name_container = squad.find("p", {"class":"title-7-medium standings__team-name"})
-    squad_name = squad_name_container.text
+    squad_name = squad_name_container.text[1:-1]
 
     squad_stats = squad.findAll("span", {"class":"title-7-medium standings__cell-text--dimmed"}) + squad.findAll("span", {"class":"title-7-bold"})
 
