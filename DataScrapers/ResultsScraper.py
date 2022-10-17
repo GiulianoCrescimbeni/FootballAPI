@@ -50,8 +50,8 @@ for days in matches_day:
         squad1_logo = squad_logo_container[0].find("img", attrs = {'src' : True})['src']
         squad2_logo = squad_logo_container[1].find("img", attrs = {'src' : True})['src']
         squad_name = match.findAll("span", {"class":"title-8-medium simple-match-card-team__name"})
-        squad1_name = squad_name[0].text
-        squad2_name = squad_name[1].text
+        squad1_name = squad_name[0].text[1:-1]
+        squad2_name = squad_name[1].text[1:-1]
 
         squad_goals = match.findAll("span", {"class":"title-7-bold simple-match-card-team__score"})
         squad1_goals = squad_goals[0].text.replace(" ","")
