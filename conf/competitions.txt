@@ -39,7 +39,7 @@ brasileirãoséried:brasileirao-serie-d-216
 brasileirãowomen:brasileirao-women-1882
 brasiliense:brasiliense-1883
 bulgarianfirstleague:bulgarian-first-league-2758
-bundesliga:bundesliga-26
+australian_bundesliga:bundesliga-26
 bundesliga:bundesliga-1
 cafchampionsleague:caf-champions-league-210
 cafconfederationcup:caf-confederation-cup-2765
