@@ -18,7 +18,6 @@ uClient.close()
 #Souping the page and getting data#
 page_soup = soup(page_html,"html.parser")
 matches_day = page_soup.findAll("of-match-cards-list")
-matches_day.pop(0)
 matchesDays_list = []
 data = "[{"
 first = 1
@@ -44,10 +43,15 @@ for days in matches_day:
         squad1_name = squad_name[0].text[1:-1]
         squad2_name = squad_name[1].text[1:-1]
         match_date_container = match.find("time", {"class":"title-8-bold"})
+        match_played = match.find("div", {"class":"simple-match-card__highlights"})
+
         if not match_date_container:
             match_date = "PostPoned"
         else:
             match_date = match_date_container.text.replace(" ","")
+        
+        if match_played:
+            match_date = "Played"
 
         if(i == 0):
             data = data + '{"homeLogo":"'+ squad1_logo +'","homeTeam":"'+ squad1_name +'","awayLogo":"'+ squad2_logo +'","awayTeam":"'+squad2_name+'","MatchDay":"'+match_date+'"}'
