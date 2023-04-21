@@ -11,11 +11,11 @@ api.listen(PORT, () => {
 });
 
 api.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname + '/landing.html'));
 });
 
 api.get('/index.html',function(req,res){
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname + '/landing.html'));
 });
 
 api.use(express.static(__dirname));
