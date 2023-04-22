@@ -5,7 +5,6 @@ chardet==4.0.0
 distlib==0.3.3
 filelock==3.3.1
 idna==2.10
-mysql-connector-python-rf==2.2.2
 pipenv==2021.5.29
 platformdirs==2.4.0
 requests==2.25.1
