@@ -46,7 +46,7 @@ for news in news_total:
     image = news.find("img", attrs = {'src' : True})['src']
 
     title_container = news.find("h3", {"class":"teaser__title"})
-    title = title_container.text
+    title = title_container.text.replace('"', '\\"')
     preview_container = news.find("p", {"class":"teaser__preview"})
     preview = preview_container.text
 
