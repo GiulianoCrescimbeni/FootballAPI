@@ -44,7 +44,7 @@ for days in matches_day:
         squad2_name = squad_name[1].text[1:-1]
         match_date_container = match.find("time", {"class":"title-8-bold"})
         match_time_container = match.find("time", {"class":"simple-match-card__info-message title-8-medium"})
-        match_time = match_time_container.text
+        match_time = match_time_container.text.replace(" ","")
         match_played = match.find("div", {"class":"simple-match-card__highlights"})
 
         if not match_date_container:
