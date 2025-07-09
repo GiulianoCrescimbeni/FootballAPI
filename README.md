@@ -1,16 +1,6 @@
 # FootballAPI
 
-A lightweight and dynamic REST API that provides real-time football data, including team standings and player statistics, by scraping content from Italian sports websites.
-
-## 📌 Table of Contents
-
-- [Overview](#clipboard-overview)
-- [How It Works](#gear-how-it-works)
-- [Installation and Usage](#computer-installation-and-usage)
-- [Deprecation Notice](#warning-deprecation-notice)
-- [Conclusion](#checkered_flag-conclusion)
-
----
+A lightweight and dynamic REST API that provides real-time football data, including team standings and player statistics, by scraping content from a sport websites.
 
 ## Overview
 
@@ -28,7 +18,7 @@ The API is entirely **dynamic**:
 The project is divided into two main components:
 
 1. **FootballScraper**  
-   A Python-based scraper located in the `/FootballScraper` folder. It dynamically collects data from [La Gazzetta dello Sport](https://www.gazzetta.it/) whenever a request is made.
+   Python-based scrapers located in the `/DataScrapers` folder. They dynamically collects data from [OneFootball](https://onefootball.com/en/) whenever a request is made.
 
 2. **Node.js Server**  
    The `server.js` file sets up the REST API server using Node.js. It routes incoming HTTP requests to the scraper, which fetches and returns live data.
@@ -44,7 +34,7 @@ No SQL or persistent storage is used—the API is fully stateless and relies on 
 - [Node.js](https://nodejs.org/)
 - Python modules:
   ```bash
-  python3 -m pip install beautifulsoup4 requests
+  python3 -m pip install -r requirements.txt
   ```
 ### Steps
 1. Clone the repository
@@ -56,8 +46,42 @@ node server.js
 ```bash
 http://localhost:3000
    ```
+## 🗺️ Available API Routes
+
+All endpoints are structured dynamically based on the `:championship` parameter (e.g., `serie-a`, `premier-league`), as defined in the `conf/competitions.txt` file.
+
+### 📊 Squad Information
+- `GET /:championship/table`  
+  Returns the full league table for the specified competition.
+
+- `GET /:championship/table/squadname/:squadName`  
+  Returns statistics for a specific team by name.
+
+- `GET /:championship/table/squadposition/:squadposition`  
+  Returns statistics for a team based on its position in the table.
+
+### 📰 News
+- `GET /:championship/news/`  
+  Returns the latest football news related to the specified championship.
+
+### 🏁 Match Results
+- `GET /:championship/results/`  
+  Returns recent match results for the specified competition.
+
+### 📅 Fixtures
+- `GET /:championship/fixtures/`  
+  Returns upcoming fixtures for the selected league.
+
+### 🔄 Transfers
+- `GET /:championship/transfers/`  
+  Returns recent transfer updates for the specified championship.
+
+### 🌍 Competitions
+- `GET /competitions`  
+  Returns the list of all available championship identifiers supported by the API.
+
 ## Deprecation Notice  
-Due to structural changes on the target website (gazzetta.it), the scraping logic may no longer function as intended.
+Due to structural changes on the target website (https://onefootball.com/en/), the scraping logic may no longer function as intended.
 However, the project remains easily maintainable—by updating the selectors in FootballScraper.py, the API can be restored to full functionality.
   
 ## Conclusion
